@@ -19,7 +19,7 @@ io.on("connection", function(client) {
   });
 
   client.on("messages", function(data) {
-    client.emit("thread", data);
+    //client.emit("thread", data);
     client.broadcast.emit("thread", data);
   });
 });
