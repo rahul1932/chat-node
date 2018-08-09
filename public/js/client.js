@@ -10,6 +10,7 @@ socket.on("connect", function (data) {
 // listener for 'thread' event, which updates messages
 socket.on("thread", function (data) {
   $("#thread").append("<div class='spanThreadMsg'>" + data.id + ': ' + data.msg + "</div>");
+  $("html, body").animate({ scrollTop: $(document).height() }, 1000);
 });
 
 // sends message to server, resets & prevents default form action
@@ -18,6 +19,7 @@ $("form").submit(function () {
     var message = $("#message").val();
     socket.emit("messages", { 'id': username, 'msg': message });
     $("#thread").append("<div class='spanMsg'>" + username + ': ' + message + "</div>");
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     this.reset();
     return false;
   }
