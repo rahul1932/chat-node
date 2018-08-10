@@ -15,14 +15,24 @@
 
         <div class="footer">
             <div class="row">
-                <form>
-                    <div class="col-xs-4 col-xs-offset-4">
-                        <input id="message" type="text" placeholder="Type your message.." class="form-control">
+                <div class="col-xs-4">
+
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <form>
+                            <div class="col-xs-8">
+                                <input id="message" type="text" placeholder="Type your message.." class="form-control">
+                            </div>
+                            <div class="col-xs-4 text-left">
+                                <input type="submit" value="Send" class="btn btn-default">
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-xs-4 text-left">
-                        <input type="submit" value="Send" class="btn btn-default">
-                    </div>
-                </form>
+                </div>
+                <div class="col-xs-4">
+                        <input type="button" value="New Group" class="btn btn-default" onclick="CreateNewGroup();">
+                </div>
             </div>
         </div>
     </div>
@@ -31,4 +41,5 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/client.js"></script>
 </body>
+
 </html>

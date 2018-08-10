@@ -5,22 +5,35 @@ var app = express();
 var server = require("http").createServer(app);
 var io = require("socket.io")(server);
 
-app.get("/", function(req, res, next) {
+app.get("/", function (req, res, next) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
 app.use(express.static("public"));
 
-io.on("connection", function(client) {
+io.on("connection", function (client) {
   console.log("Client connected...");
 
-  client.on("join", function(data) {
+  client.on("join", function (data) {
+    debugger
     console.log(data);
   });
 
-  client.on("messages", function(data) {
+  client.on("messages", function (data) {
     //client.emit("thread", data);
     client.broadcast.emit("thread", data);
+  });
+
+  client.on("newGroup", function (data) {
+    console.log(data);
+    var nsp = io.of(data);
+    client.to(data).emit('hi', 'everyone!');
+    nsp.on('connection', function (socket) {
+      console.log('someone connected');
+    });
+    nsp.on("messages", function (data) {
+      client.broadcast.to(data.id).emit("thread", data.msg);
+    });
   });
 });
 

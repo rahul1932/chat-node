@@ -33,3 +33,13 @@ $(document).ready(function () {
   username = person || socket.id;
   $("#lblUserName").text(username);
 });
+
+function CreateNewGroup() {
+  while (!groupName) {
+    var groupName = prompt("Please enter group name", "");
+  }
+  socket.emit("newGroup","/" +  groupName || socket.id);
+  socket.on("hi", function (data) {
+    socket = io(groupName || socket.id);
+  });
+}
